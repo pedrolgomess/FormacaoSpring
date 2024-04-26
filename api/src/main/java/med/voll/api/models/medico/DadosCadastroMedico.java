@@ -17,5 +17,5 @@ package med.voll.api.models.medico;
 import med.voll.api.models.endereco.DadosEndereco;
 import med.voll.api.models.enums.Especialidade;
 
-public record DadosCadastroMedico(String nome, String email, String telefone, String crm, Especialidade especialidade, DadosEndereco dadosEndereco) {
+public record DadosCadastroMedico(String nome, String email, String crm, Especialidade especialidade, DadosEndereco dadosEndereco) {
 }

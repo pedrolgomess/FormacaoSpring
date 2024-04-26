@@ -1,5 +1,6 @@
 package med.voll.api.controllers;
 
+import jakarta.transaction.Transactional;
 import med.voll.api.models.medico.DadosCadastroMedico;
 import med.voll.api.models.medico.Medico;
 import med.voll.api.repositories.MedicoRepository;
@@ -15,6 +16,7 @@ public class MedicoController {
     @Autowired
     private MedicoRepository medicoRepository;
     @PostMapping
+    @Transactional
     public void postMedico(@RequestBody DadosCadastroMedico dadosCadastroMedico){
         medicoRepository.save(new Medico(dadosCadastroMedico));
     }
