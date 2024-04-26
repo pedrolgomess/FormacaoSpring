@@ -1,23 +1,30 @@
 package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
+import med.voll.api.models.medico.DadosListagemMedico;
 import med.voll.api.models.paciente.DadosCadastraisPaciente;
+import med.voll.api.models.paciente.DadosListagemPaciente;
 import med.voll.api.models.paciente.Paciente;
 import med.voll.api.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("pacientes")
 public class PacienteController {
     @Autowired
     private PacienteRepository pacienteRepository;
+
     @PostMapping
     @Transactional
     public void postPaciente(@RequestBody DadosCadastraisPaciente dadosCadastraisPaciente){
         pacienteRepository.save(new Paciente(dadosCadastraisPaciente));
+    }
+
+    @GetMapping
+    public List<DadosListagemPaciente> getPacientes(){
+        return pacienteRepository.findAll().stream().map(DadosListagemPaciente::new).toList();
     }
 }
