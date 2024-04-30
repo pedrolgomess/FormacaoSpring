@@ -1,7 +1,7 @@
 package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
-import med.voll.api.models.medico.DadosListagemMedico;
+import med.voll.api.models.paciente.DadosAlteraPaciente;
 import med.voll.api.models.paciente.DadosCadastraisPaciente;
 import med.voll.api.models.paciente.DadosListagemPaciente;
 import med.voll.api.models.paciente.Paciente;
@@ -11,8 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("pacientes")
@@ -29,5 +27,17 @@ public class PacienteController {
     @GetMapping
     public Page<DadosListagemPaciente> getPacientes(@PageableDefault(size = 10,sort = {"nome"}) Pageable paginacao){
         return pacienteRepository.findAll(paginacao).map(DadosListagemPaciente::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void putPaciente(@RequestBody DadosAlteraPaciente dadosAlteraPaciente){
+        /*
+        busca o médico atual no banco de dados através do ID,
+        criar método de atualizar informacoes no objeto Medico.
+        recebendo o objeto que DTO com novos valores
+        */
+        var paciente = pacienteRepository.getReferenceById(dadosAlteraPaciente.id());
+        paciente.atualizaInfoPaciente(dadosAlteraPaciente);
     }
 }

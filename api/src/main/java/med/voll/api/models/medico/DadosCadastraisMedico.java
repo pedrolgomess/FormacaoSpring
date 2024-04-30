@@ -22,7 +22,7 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.api.models.endereco.DadosEndereco;
 import med.voll.api.models.enums.Especialidade;
 
-public record DadosCadastroMedico(
+public record DadosCadastraisMedico(
         @NotBlank
         String nome,
         @NotBlank
