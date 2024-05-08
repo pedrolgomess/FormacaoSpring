@@ -25,7 +25,7 @@ public class MedicoController {
         medicoRepository.save(novoMedico);
         var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(novoMedico.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosRetPostPutMedico(novoMedico));
+        return ResponseEntity.created(uri).body(new DadosRetGtPtPtMedico(novoMedico));
     }
 
     @GetMapping
@@ -45,7 +45,7 @@ public class MedicoController {
         */
         var medico = medicoRepository.getReferenceById(dadosAlteraMedico.id());
         medico.atualizaInfoMedico(dadosAlteraMedico);
-        return ResponseEntity.ok(new DadosRetPostPutMedico(medico));
+        return ResponseEntity.ok(new DadosRetGtPtPtMedico(medico));
     }
 
     @DeleteMapping("/{id}")

@@ -24,7 +24,7 @@ public class PacienteController {
         pacienteRepository.save(novoPaciente);
         var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(novoPaciente.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosRetPostPutPaciente(novoPaciente));
+        return ResponseEntity.created(uri).body(new DadosRetGtPtPtPaciente(novoPaciente));
     }
 
     @GetMapping
@@ -43,7 +43,7 @@ public class PacienteController {
         */
         var paciente = pacienteRepository.getReferenceById(dadosAlteraPaciente.id());
         paciente.atualizaInfoPaciente(dadosAlteraPaciente);
-        return ResponseEntity.ok(new DadosRetPostPutPaciente(paciente));
+        return ResponseEntity.ok(new DadosRetGtPtPtPaciente(paciente));
     }
 
     @DeleteMapping("/{id}")
@@ -52,5 +52,11 @@ public class PacienteController {
         var paciente = pacienteRepository.getReferenceById(id);
         paciente.desativar();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getPorPaciente(@PathVariable Long id){
+        var paciente = pacienteRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosRetGtPtPtPaciente(paciente));
     }
 }

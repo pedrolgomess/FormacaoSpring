@@ -3,7 +3,7 @@ package med.voll.api.models.medico;
 import med.voll.api.models.endereco.Endereco;
 import med.voll.api.models.enums.Especialidade;
 
-public record DadosRetPostPutMedico(
+public record DadosRetGtPtPtMedico(
         Long id,
         String nome,
         String email,
@@ -13,7 +13,7 @@ public record DadosRetPostPutMedico(
         Endereco endereco,
         Boolean ativo) {
 
-    public DadosRetPostPutMedico(Medico medico) {
+    public DadosRetGtPtPtMedico(Medico medico) {
         this(medico.getId(), medico.getNome(), medico.getEmail(), medico.getTelefone(), medico.getCrm(), medico.getEspecialidade(), medico.getEndereco(), medico.getAtivo());
     }
 }
