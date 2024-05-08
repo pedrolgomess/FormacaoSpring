@@ -44,4 +44,8 @@ public class Paciente {
             this.endereco.atualizaInfo(dadosAlteraPaciente.dadosEndereco());
         }
     }
+
+    public void desativar() {
+        this.ativo = false;
+    }
 }
