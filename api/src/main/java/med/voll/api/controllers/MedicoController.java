@@ -2,16 +2,15 @@ package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.models.medico.DadosAlteraMedico;
-import med.voll.api.models.medico.DadosCadastraisMedico;
-import med.voll.api.models.medico.DadosListagemMedico;
-import med.voll.api.models.medico.Medico;
+import med.voll.api.models.medico.*;
 import med.voll.api.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder; //classe que gera a URI
 
 @RestController
 @RequestMapping("medicos")
@@ -21,18 +20,23 @@ public class MedicoController {
 
     @PostMapping
     @Transactional
-    public void postMedico(@RequestBody @Valid DadosCadastraisMedico dadosCadastroMedico){
-        medicoRepository.save(new Medico(dadosCadastroMedico));
+    public ResponseEntity postMedico(@RequestBody @Valid DadosCadastraisMedico dadosCadastroMedico, UriComponentsBuilder uriBuilder){
+        var novoMedico = new Medico(dadosCadastroMedico);
+        medicoRepository.save(novoMedico);
+        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(novoMedico.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosRetPostPutMedico(novoMedico));
     }
 
     @GetMapping
-    public Page<DadosListagemMedico> getMedicos(@PageableDefault(size = 10,sort = {"nome"}) Pageable paginacao) {
-        return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+    public ResponseEntity<Page<DadosListagemMedico>> getMedicos(@PageableDefault(size = 10,sort = {"nome"}) Pageable paginacao) {
+        var page = medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+        return ResponseEntity.ok(page);
     }
 
     @PutMapping
     @Transactional
-    public void putMedico(@RequestBody @Valid DadosAlteraMedico dadosAlteraMedico){
+    public ResponseEntity putMedico(@RequestBody @Valid DadosAlteraMedico dadosAlteraMedico){
         /*
         busca o médico atual no banco de dados através do ID,
         criar método de atualizar informacoes no objeto Medico.
@@ -41,12 +45,14 @@ public class MedicoController {
         */
         var medico = medicoRepository.getReferenceById(dadosAlteraMedico.id());
         medico.atualizaInfoMedico(dadosAlteraMedico);
+        return ResponseEntity.ok(new DadosRetPostPutMedico(medico));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void delMedico(@PathVariable Long id){
+    public ResponseEntity delMedico(@PathVariable Long id){
         var medico = medicoRepository.getReferenceById(id);
         medico.desativar();
+        return ResponseEntity.noContent().build();
     }
 }
