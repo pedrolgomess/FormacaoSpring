@@ -1,6 +1,6 @@
-package med.voll.api.models.paciente;
+package med.voll.api.domain.paciente;
 
-import med.voll.api.models.endereco.Endereco;
+import med.voll.api.domain.endereco.Endereco;
 
 public record DadosRetGtPtPtPaciente(Long id, String nome, String email, String telefone, String cpf, Endereco endereco, Boolean ativo) {
     public DadosRetGtPtPtPaciente(Paciente paciente) {

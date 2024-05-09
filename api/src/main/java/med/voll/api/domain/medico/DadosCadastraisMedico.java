@@ -1,4 +1,4 @@
-package med.voll.api.models.medico;
+package med.voll.api.domain.medico;
 /*
     Esses dados que estão chegando na API,
     usaremos o recurso de record (disponível nas últimas versões do Java).
@@ -19,8 +19,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import med.voll.api.models.endereco.DadosEndereco;
-import med.voll.api.models.enums.Especialidade;
+import med.voll.api.domain.endereco.DadosEndereco;
+import med.voll.api.domain.enums.Especialidade;
 
 public record DadosCadastraisMedico(
         @NotBlank

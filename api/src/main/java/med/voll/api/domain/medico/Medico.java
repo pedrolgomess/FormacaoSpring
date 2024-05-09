@@ -1,12 +1,12 @@
-package med.voll.api.models.medico;
+package med.voll.api.domain.medico;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.models.endereco.Endereco;
-import med.voll.api.models.enums.Especialidade;
+import med.voll.api.domain.endereco.Endereco;
+import med.voll.api.domain.enums.Especialidade;
 
 /*
     DTO É DIFERENTE DE JPA

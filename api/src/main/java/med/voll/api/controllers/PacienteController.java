@@ -1,7 +1,7 @@
 package med.voll.api.controllers;
 
 import jakarta.transaction.Transactional;
-import med.voll.api.models.paciente.*;
+import med.voll.api.domain.paciente.*;
 import med.voll.api.repositories.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
