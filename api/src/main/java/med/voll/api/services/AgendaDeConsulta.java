@@ -36,8 +36,8 @@ public class AgendaDeConsulta {
     }
 
     private Medico escolherMedico(DadosConsulta dadosConsulta){
-        if (dadosConsulta.especialidade() == null){
-            throw new ConsultaException("Especialidade é obrigatória quando médico não for escolhido");
+        if (dadosConsulta.especialidade() == null) {
+            throw new ConsultaException("Especialidade é obrigatória quando médico não for escolhido!");
         }
         return medicoRepository.escolherMedicoAleatorioLivreNaData(dadosConsulta.especialidade(), dadosConsulta.timestamp());
     }
