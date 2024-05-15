@@ -17,12 +17,12 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
                 where
                 m.ativo = True
                 and
-                m.especialidade = :especialidade
+                m.especialidade = 'CARDIOLOGIA'
                 and
                 m.id not in(
                         select c.medico_id from Consultas c
                         where
-                        c.data = :timestamp
+                        c.data = '20240105T10:00'
                 )
                 order by RANDOM()
                 limit 1
