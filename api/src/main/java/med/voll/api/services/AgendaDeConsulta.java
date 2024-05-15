@@ -28,13 +28,16 @@ public class AgendaDeConsulta {
         }
 
         var medico = escolherMedico(dadosConsulta);
-        var paciente = pacienteRepository.findById(dadosConsulta.pacienteId()).get();
+        var paciente = pacienteRepository.getReferenceById(dadosConsulta.pacienteId());
 
         var consulta = new Consulta(null, medico,paciente, dadosConsulta.timestamp());
         consultaRepository.save(consulta);
     }
 
     private Medico escolherMedico(DadosConsulta dadosConsulta){
-        return null;
+        if (dadosConsulta.especialidade() == null){
+            throw new ConsultaException("Especialidade é obrigatória quando médico não for escolhido");
+        }
+        return medicoRepository.escolherMedicoAleatorioLivreNaData(dadosConsulta.especialidade(), dadosConsulta.timestamp());
     }
 }
