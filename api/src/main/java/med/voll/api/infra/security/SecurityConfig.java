@@ -1,5 +1,7 @@
 package med.voll.api.infra.security;
 
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,11 +13,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+    @Autowired
+    private SecurityFilter securityFilter;
     // O objeto SecurityFilterChain do Spring é usado para configurar o processo de autenticação e de autorização.
     // A partir da versão 3.1 do Spring Boot algumas mudanças foram realizadas, em relação às configurações de segurança
     @Bean //A anotação @Bean serve para exportar uma classe para o Spring, fazendo com que ele consiga carregá-la e
@@ -27,6 +31,7 @@ public class SecurityConfig {
                     req.requestMatchers("/login").permitAll();
                     req.anyRequest().authenticated();
                 })
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
