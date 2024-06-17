@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.paciente.Paciente;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Table(name = "consultas")
 @Entity(name = "Consulta")
@@ -28,7 +28,7 @@ public class Consulta {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    private Timestamp timestamp;
+    private LocalDateTime localDateTime;
 
     @Column(name = "motivo_cancelamento")
     @Enumerated(EnumType.STRING)

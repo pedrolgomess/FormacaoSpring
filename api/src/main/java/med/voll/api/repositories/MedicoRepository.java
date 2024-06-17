@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /*
     Herdar de uma interface chamada JpaRepository, usando um extends. Entre <>, passaremos dois tipos de objeto.
@@ -27,5 +28,5 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
                 order by RANDOM()
                 limit 1
                 """)
-    Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, Timestamp timestamp);
+    Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, LocalDateTime timestamp);
 }

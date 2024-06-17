@@ -31,7 +31,7 @@ public class AgendaDeConsulta {
         var medico = escolherMedico(dadosConsulta);
         var paciente = pacienteRepository.getReferenceById(dadosConsulta.pacienteId());
 
-        var consulta = new Consulta(null, medico,paciente, dadosConsulta.timestamp(), null);
+        var consulta = new Consulta(null, medico,paciente, dadosConsulta.localDateTime(), null);
         consultaRepository.save(consulta);
     }
 
@@ -39,7 +39,7 @@ public class AgendaDeConsulta {
         if (dadosConsulta.especialidade() == null) {
             throw new ConsultaException("Especialidade é obrigatória quando médico não for escolhido!");
         }
-        return medicoRepository.escolherMedicoAleatorioLivreNaData(dadosConsulta.especialidade(), dadosConsulta.timestamp());
+        return medicoRepository.escolherMedicoAleatorioLivreNaData(dadosConsulta.especialidade(), dadosConsulta.localDateTime());
     }
 
     public void cancelar(DadosCancela dadosCancela){

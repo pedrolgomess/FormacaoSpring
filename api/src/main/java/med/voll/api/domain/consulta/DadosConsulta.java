@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import med.voll.api.domain.enums.Especialidade;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public record DadosConsulta(
         Long medicoId,
@@ -13,7 +14,7 @@ public record DadosConsulta(
 
         @NotNull
         @Future
-        Timestamp timestamp,
+        LocalDateTime localDateTime,
 
         Especialidade especialidade) {
 }
