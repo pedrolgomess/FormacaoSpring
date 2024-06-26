@@ -14,16 +14,16 @@ import java.time.LocalDateTime;
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
     @Query("""
-                select m from Medicos m
+                select m from Medico m
                 where
-                m.ativo = True
+                m.ativo = true
                 and
-                m.especialidade = 'CARDIOLOGIA'
+                m.especialidade = :especialidade
                 and
                 m.id not in(
-                        select c.medico_id from Consultas c
+                        select c.medico.id from Consulta c
                         where
-                        c.data = '20240105T10:00'
+                        c.localDateTime = :timestamp
                 )
                 order by RANDOM()
                 limit 1
