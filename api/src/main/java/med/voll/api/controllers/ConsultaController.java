@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.consulta.DadosCancela;
 import med.voll.api.domain.consulta.DadosConsulta;
-import med.voll.api.domain.consulta.DadosDetalhamentoConsulta;
 import med.voll.api.services.AgendaDeConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

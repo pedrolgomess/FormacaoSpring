@@ -1,6 +1,5 @@
-package med.voll.api.domain.consulta.validacoes;
+package med.voll.api.domain.consulta.validacoes.agendamento;
 
-import jakarta.validation.ValidationException;
 import med.voll.api.domain.consulta.DadosConsulta;
 import med.voll.api.domain.consulta.exception.ConsultaException;
 import med.voll.api.repositories.MedicoRepository;
