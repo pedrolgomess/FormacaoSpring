@@ -8,13 +8,14 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public record DadosConsulta(
+
         Long medicoId,
         @NotNull
         Long pacienteId,
 
         @NotNull
         @Future
-        LocalDateTime localDateTime,
+        LocalDateTime data,
 
         Especialidade especialidade) {
 }

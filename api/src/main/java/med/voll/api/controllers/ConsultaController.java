@@ -20,8 +20,8 @@ public class ConsultaController {
     @PostMapping
     @Transactional
     public ResponseEntity agendar(@RequestBody @Valid DadosConsulta dadosConsulta){
-        agendaDeConsulta.agendar(dadosConsulta);
-        return ResponseEntity.ok(new DadosDetalhamentoConsulta(null,null,null,null));
+        var dadosDetalhamentoConsulta = agendaDeConsulta.agendar(dadosConsulta);
+        return ResponseEntity.ok(dadosDetalhamentoConsulta);
     }
 
     @DeleteMapping

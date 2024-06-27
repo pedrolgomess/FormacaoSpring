@@ -11,7 +11,7 @@ public class HorarioFuncionaClinica {
 
     public void validar(DadosConsulta dados) {
 
-        var dataConsulta = dados.localDateTime();
+        var dataConsulta = dados.data();
         var agora = LocalDateTime.now();
         var diferencaEmMinutos = Duration.between(agora, dataConsulta).toMinutes();
 

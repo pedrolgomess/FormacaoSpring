@@ -23,10 +23,18 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
                 m.id not in(
                         select c.medico.id from Consulta c
                         where
-                        c.localDateTime = :timestamp
+                        c.data = :timestamp
                 )
                 order by RANDOM()
                 limit 1
                 """)
     Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, LocalDateTime timestamp);
+
+    @Query("""
+            select m.ativo
+            from Medico m
+            where
+            m.id = :id
+            """)
+    Boolean findAtivoId(Long id);
 }
